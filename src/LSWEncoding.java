@@ -7,16 +7,16 @@ public class LSWEncoding {
 
 	public static void main(String[] args) throws IOException {
 				
-		BufferedReader br = new BufferedReader(new FileReader("code.txt"));
-		char p = '\0';
-		char c = (char)br.read();
+		BufferedReader br = new BufferedReader(new FileReader("test.txt"));
+		String p = "";
+		String c = "" + (char)br.read();
 		String concat = "" + c;
 		
 		//make the dictionary
 		//initialize it for 0-255
 		ArrayList<String> dictionary = new ArrayList<String>();
 		
-		for (int i = 0; i < 266; i++)
+		for (int i = 0; i < 256; i++)
 		{
 			String letter = "" + (char)i;
 			dictionary.add(letter);
@@ -24,23 +24,21 @@ public class LSWEncoding {
 		
 		while (br.ready())
 		{
-		
+			//if it is already in the dictionary 
 			if (dictionary.contains(concat))
 			{
-				
+				p = concat; 
 			}
-			//if it's not in the dictionary
+			else //if it's not in the dictionary
 			{
 				//add 
 				String check = "" + p;
-				System.out.print (dictionary.indexOf(check));
+				System.out.print (dictionary.indexOf(check) + " ");
 				dictionary.add(concat);
 				p = c;
 			}
-			
-		}
-		
-		c = (char)br.read();
-		concat = "" + p + c;
+			c = "" + (char)br.read();
+			concat = "" + p + c;
+		}	
 	}
 }
