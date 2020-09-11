@@ -33,9 +33,12 @@ public class LSWEncoding {
 			{
 				//add 
 				String check = "" + p;
-				System.out.print (dictionary.indexOf(check) + " ");
-				dictionary.add(concat);
-				p = c;
+				if (dictionary.indexOf(check) <= 500) 
+				{
+					System.out.print (dictionary.indexOf(check) + " ");
+					dictionary.add(concat);
+					p = c;
+				}
 			}
 			c = "" + (char)br.read();
 			concat = "" + p + c;
