@@ -39,6 +39,11 @@ public class LSWEncoding {
 					dictionary.add(concat);
 					p = c;
 				}
+				else 
+				{
+					br.close();
+					break; 
+				}
 			}
 			c = "" + (char)br.read();
 			concat = "" + p + c;
