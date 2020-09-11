@@ -5,9 +5,10 @@ import java.util.*;
 
 public class LSWEncoding {
 
-	public static void main(String[] args) throws IOException {
-				
-		BufferedReader br = new BufferedReader(new FileReader("test.txt"));
+	public void encoding(String input) throws IOException {
+		String inputFile = input;
+		BufferedReader br = new BufferedReader(new FileReader(inputFile));
+		BufferedWriter bw = new BufferedWriter(new FileWriter(inputFile+".txt"));
 		String p = "";
 		String c = "" + (char)br.read();
 		String concat = "" + c;
@@ -35,7 +36,7 @@ public class LSWEncoding {
 				String check = "" + p;
 				if (dictionary.indexOf(check) <= 500) 
 				{
-					System.out.print (dictionary.indexOf(check) + " ");
+					bw.write(dictionary.indexOf(check) + " ");
 					dictionary.add(concat);
 					p = c;
 				}
@@ -48,5 +49,10 @@ public class LSWEncoding {
 			c = "" + (char)br.read();
 			concat = "" + p + c;
 		}	
+		bw.write(";");
+		for(int i=0;i<dictionary.size();i++){
+			bw.write(dictionary.get(i).length()+"="+dictionary.get(i)+",");
+		}
+		bw.close();
 	}
 }
