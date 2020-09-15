@@ -49,10 +49,15 @@ public class LSWEncoding {
 			c = "" + (char)br.read();
 			concat = "" + p + c;
 		}	
+		if(!dictionary.contains(concat)){
+			dictionary.add(concat);
+		}
+		bw.write(dictionary.get(dictionary.size()-1));
 		bw.write(";");
 		for(int i=0;i<dictionary.size();i++){
 			bw.write(dictionary.get(i).length()+"="+dictionary.get(i)+",");
 		}
 		bw.close();
+		br.close();
 	}
 }
