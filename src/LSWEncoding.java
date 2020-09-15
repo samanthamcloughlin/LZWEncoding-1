@@ -1,13 +1,16 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
-public class LSWEncoding {
+public class LZWEncoding {
+	
+	public LZWEncoding() {
+		
+	}
 
-	public static void main(String[] args) throws IOException {
-				
-		BufferedReader br = new BufferedReader(new FileReader("test.txt"));
+	public void encoding(String input) throws IOException {
+		String inputFile = input;
+		BufferedReader br = new BufferedReader(new FileReader(inputFile));
+		BufferedWriter bw = new BufferedWriter(new FileWriter(inputFile+" encoded.txt"));
 		String p = "";
 		String c = "" + (char)br.read();
 		String concat = "" + c;
@@ -35,7 +38,7 @@ public class LSWEncoding {
 				String check = "" + p;
 				if (dictionary.indexOf(check) <= 500) 
 				{
-					System.out.print (dictionary.indexOf(check) + " ");
+					bw.write(dictionary.indexOf(check) + " ");
 					dictionary.add(concat);
 					p = c;
 				}
@@ -48,5 +51,19 @@ public class LSWEncoding {
 			c = "" + (char)br.read();
 			concat = "" + p + c;
 		}	
+		if(!dictionary.contains(concat)){
+			dictionary.add(concat);
+		}
+		int lastIndex = dictionary.indexOf(concat);
+		
+		System.out.println("lastIndex: "+lastIndex+",="+dictionary.get(lastIndex));
+		bw.write(""+lastIndex);
+		System.out.println(dictionary.toString());
+		bw.write(";");
+		for(int i=0;i<dictionary.size();i++){
+			bw.write(dictionary.get(i).length()+"="+dictionary.get(i)+",");
+		}
+		bw.close();
+		br.close();
 	}
 }
