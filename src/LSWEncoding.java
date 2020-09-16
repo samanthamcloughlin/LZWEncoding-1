@@ -8,7 +8,7 @@ import java.util.*;
 
 public class LSWEncoding {
 	
-	public LZWEncoding() {
+	public LSWEncoding() {
 		
 	}
 
